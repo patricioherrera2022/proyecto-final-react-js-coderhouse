@@ -28,6 +28,10 @@ html{
   color: white;
 }
 
+h3, hr, strong, .listado{
+  color: white;
+}
+
 .App-link {
   color: #61dafb;
 }

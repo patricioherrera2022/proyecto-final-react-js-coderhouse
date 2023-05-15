@@ -1,38 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import {pedirProductos} from '../../helpers/pedirProductos'
-import {ImSpinner3} from 'react-icons/im'
-import {ItemDetail} from '../ItemDetail/ItemDetail'
+import { getFirestore } from '../../firebase/config'
+import { ItemDetail } from '../ItemDetail/ItemDetail'
+import { ImSpinner3 } from 'react-icons/im'
 import { useParams } from 'react-router-dom'
 
 export const ItemDetailContainer = () => {
 
-    const [item, setItem] = useState(null)
+  const [item, setItem] = useState(null)
 
-    const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-    const {itemId} = useParams()
+  const { itemId } = useParams()
 
-    useEffect(() =>{
+  useEffect(() => {
 
-        setLoading(true)
-        pedirProductos()
-            .then(res =>{
-                setItem( res.find( prod => prod.id === Number(itemId)))
-            })
-            .catch((error) => console.log(error))
-            .finally(() => {
-                setLoading(false)
-            })
-    },[itemId])
+    setLoading(true)
+    const db = getFirestore()
 
+    const productos = db.collection('productos')
+
+    const item = productos.doc(itemId) 
+
+    item.get()
+      .then((doc) => {
+        setItem({
+          id: doc.id, ...doc.data()
+        })
+      })
+      .finally(() => { setLoading(false) })
+
+  }, [itemId])
 
   return (
     <section>
-        {
-            loading
-            ?<ImSpinner3/>
-            :<ItemDetail {...item}/>
-        }
+      {
+        loading
+          ? <ImSpinner3 />
+          : <ItemDetail {...item} />
+      }
     </section>
   )
 }
