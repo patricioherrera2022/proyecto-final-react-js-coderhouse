@@ -4,6 +4,7 @@ import { ItemCount } from '../ItemCount/ItemCount';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import "./detail.css"
 
 export const ItemDetail = ({id, name, description, image, price, category, stock }) => {
 
@@ -18,15 +19,7 @@ export const ItemDetail = ({id, name, description, image, price, category, stock
   const [counter, setCounter] = useState(0)
 
   const sumarAlCarrito = () => {
-    const newItem = {
-      id,
-      name,
-      description,
-      image,
-      price,
-      category,
-      counter
-    }
+    const newItem = {id,name,description,image,price,category,counter}
     addToCart(newItem)
   }
 
@@ -45,10 +38,10 @@ export const ItemDetail = ({id, name, description, image, price, category, stock
             <ItemCount max={stock} modify={setCounter} cantidad={counter} />
             <Button onClick={sumarAlCarrito}>Agregar al carrito</Button>
             <Link to='/cart' className='btn btn-success'>
-              Terminar compra
+              Finalizar
             </Link>
           </Card.Body>
-          <button className='btn btn-success' onClick={volverHaciaAtras}>⬅ Ver otros productos</button>
+          <button className='btn btn-success' onClick={volverHaciaAtras}>⬅ Seguir viendo productos</button>
         </Card>
       </>
     </div>
