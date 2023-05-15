@@ -1,0 +1,11 @@
+.listado{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+.precioTotal{
+    color: white;
+}
+hr{
+    color: white;
+}
