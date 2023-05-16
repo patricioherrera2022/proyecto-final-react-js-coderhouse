@@ -49,8 +49,8 @@ export const Checkout = () => {
       .then((res) => {
         Swal.fire({
           icon: 'success',
-          title: 'Su compra fue realizada con éxitos',
-          text: `Guarde su numero de compra: ${res.id}`,
+          title: 'Prenda comprada, muchas gracias!',
+          text: `N° de orden: ${res.id}`,
           willClose: () => {
             vaciarCarrito()
           }
